@@ -1,6 +1,5 @@
-allprojects {
-    repositories {
-        mavenCentral()
-        maven("https://maven.pkg.jetbrains.space/public/p/kotlinx-html/maven")
-    }
+plugins {
+    alias(libs.plugins.kotlin.mpp) apply false
+    alias(libs.plugins.buildconfig) apply false
 }
+

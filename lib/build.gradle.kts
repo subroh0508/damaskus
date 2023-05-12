@@ -1,24 +1,34 @@
 plugins {
-    kotlin("js") version "1.8.20"
+    alias(libs.plugins.kotlin.mpp)
 }
 
 kotlin {
-    js {
-        binaries.executable()
-        browser {
-            commonWebpackConfig {
-                cssSupport {
-                    enabled.set(true)
+    targets {
+        js {
+            binaries.executable()
+            browser {
+                commonWebpackConfig {
+                    cssSupport {
+                        enabled.set(true)
+                    }
                 }
             }
         }
     }
-}
 
-dependencies {
-    implementation("org.jetbrains.kotlin-wrappers:kotlin-react:18.2.0-pre.346")
-    implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom:18.2.0-pre.346")
-    implementation("org.jetbrains.kotlin-wrappers:kotlin-emotion:11.9.3-pre.346")
+    sourceSets {
+        commonTest {
+            dependencies {
+                implementation(kotlin("test"))
+            }
+        }
 
-    testImplementation(kotlin("test"))
+        val jsMain by getting {
+            dependencies {
+                implementation("org.jetbrains.kotlin-wrappers:kotlin-react:18.2.0-pre.346")
+                implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom:18.2.0-pre.346")
+                implementation("org.jetbrains.kotlin-wrappers:kotlin-emotion:11.9.3-pre.346")
+            }
+        }
+    }
 }
