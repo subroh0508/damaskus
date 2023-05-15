@@ -10,7 +10,7 @@ fun Project.buildCopyDevelopmentExecutableArtifact(
     target + TASK_COPY_DEVELOPMENT_EXECUTABLE_ARTIFACT.capitalize(),
     Copy::class.java,
 ) {
-    from("${project.buildDir}/$ORIGINAL_FILE_PATH") {
+    from("$buildDir/$ORIGINAL_FILE_PATH") {
         include("*$target.js")
         include("*$target.js.map")
 
@@ -20,9 +20,22 @@ fun Project.buildCopyDevelopmentExecutableArtifact(
     into(getArtifactDir().absolutePath)
 }
 
+fun Project.buildCopyCommonResources() = tasks.register(
+    TASK_COPY_COMMON_RESOURCES,
+    Copy::class.java,
+) {
+    from("$projectDir/$COMMON_RESOURCES_PATH") {
+        include("**/*")
+    }
+    into(getArtifactDir().absolutePath)
+}
+
 private const val TASK_COPY_DEVELOPMENT_EXECUTABLE_ARTIFACT = "copyDevelopmentExecutableArtifact"
+private const val TASK_COPY_COMMON_RESOURCES = "copyCommonResources"
+
 private const val FILE_NAME = "artifact"
 private const val ORIGINAL_FILE_PATH = "compileSync/js/main/developmentExecutable/kotlin"
+private const val COMMON_RESOURCES_PATH = "src/commonMain/resources"
 
 private fun Project.getArtifactDir(): File {
     val artifactDir = project.buildDir
