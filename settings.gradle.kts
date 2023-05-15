@@ -15,7 +15,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "damas-kus"
+rootProject.name = "damaskus"
 
 include(
     ":lib",

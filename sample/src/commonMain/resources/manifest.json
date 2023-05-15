@@ -8,7 +8,7 @@
   },
   "content_scripts": [
     {
-      "js": ["damas-kus-sample-content.js"],
+      "js": ["damaskus-sample-content.js"],
       "matches": ["https://www.example.com/"]
     }
   ]
