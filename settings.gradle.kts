@@ -19,4 +19,5 @@ rootProject.name = "damas-kus"
 
 include(
     ":lib",
+    ":sample",
 )
