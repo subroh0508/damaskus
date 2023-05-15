@@ -1,5 +1,6 @@
-package net.subroh0508.damaskus.gradle.plugin
+package net.subroh0508.damaskus.gradle.plugin.tasks
 
+import org.jetbrains.kotlin.gradle.targets.js.dsl.KotlinJsBinaryMode
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 object WebpackTasks {
@@ -8,12 +9,12 @@ object WebpackTasks {
 
     fun browserWebpack(
         name: String,
-        mode: KotlinWebpackConfig.Mode,
+        mode: KotlinJsBinaryMode,
     ) = buildString {
         append(name)
         listOf(
             BROWSER,
-            mode.name,
+            mode.name.toLowerCase(),
             WEBPACK,
         ).forEach {
             append(it.capitalize())
