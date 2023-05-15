@@ -1,6 +1,4 @@
 pluginManagement {
-    includeBuild("build-logic")
-
     repositories {
         gradlePluginPortal()
         mavenCentral()
@@ -21,3 +19,6 @@ include(
     ":lib",
     ":sample",
 )
+
+includeBuild("build-logic")
+includeBuild("plugin")

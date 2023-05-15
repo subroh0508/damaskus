@@ -1,47 +1,10 @@
 plugins {
     alias(libs.plugins.kotlin.mpp)
+    id("net.subroh0508.damaskus.bundle-artifacts")
 }
 
 kotlin {
-    targets {
-        js("content", IR) {
-            binaries.executable()
-            browser {
-                distribution {
-                    name = "content"
-                }
-                commonWebpackConfig {
-                    outputFileName = "content.js"
-                    cssSupport {
-                        enabled.set(true)
-                    }
-                }
-            }
-        }
-
-        js("popup", IR) {
-            binaries.executable()
-            browser {
-                distribution {
-                    name = "popup"
-                }
-                commonWebpackConfig {
-                    outputFileName = "popup.js"
-                    cssSupport {
-                        enabled.set(true)
-                    }
-                }
-            }
-        }
-    }
-
     sourceSets {
-        all {
-            languageSettings.apply {
-                optIn("kotlin.js.ExperimentalJsExport")
-            }
-        }
-
         commonTest {
             dependencies {
                 implementation(kotlin("test"))
