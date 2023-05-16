@@ -4,11 +4,11 @@
   "version": "1.0",
   "description": "Sample Extension by Kotlin/JS",
   "action": {
-    "default_popup": "popup.html"
+    "default_popup": "popup/popup.html"
   },
   "content_scripts": [
     {
-      "js": ["content.js"],
+      "js": ["scripts/content-script.js"],
       "matches": ["https://www.example.com/"]
     }
   ]

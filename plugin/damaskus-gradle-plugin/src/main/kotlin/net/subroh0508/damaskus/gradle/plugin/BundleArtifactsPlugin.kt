@@ -17,15 +17,15 @@ class BundleArtifactsPlugin : Plugin<Project> {
 
         val mppExtension = the<KotlinMultiplatformExtension>()
 
-        ChromeExtensionScripts.targets().forEach { jsTarget ->
-            mppExtension.js(jsTarget) {
+        ChromeExtensionScripts.values().forEach { scripts ->
+            mppExtension.js(scripts.toString()) {
                 binaries.executable()
                 browser {
                     distribution {
-                        name = jsTarget
+                        name = scripts.filename
                     }
                     commonWebpackConfig {
-                        outputFileName = "$jsTarget.js"
+                        outputFileName = "${scripts.filename}.js"
                         cssSupport {
                             enabled.set(true)
                         }
@@ -41,8 +41,8 @@ class BundleArtifactsPlugin : Plugin<Project> {
         val copyCommonResources by buildCopyCommonResources()
 
         chromeExtensionDevelopmentExecutableArtifacts.dependsOn(copyCommonResources)
-        getDevelopmentCompileExecutableKotlinTasks(target).forEach { (jsTarget, task) ->
-            val copy by buildCopyDevelopmentExecutableArtifact(jsTarget)
+        getDevelopmentCompileExecutableKotlinTasks(target).forEach { (scripts, task) ->
+            val copy by buildCopyDevelopmentExecutableArtifact(scripts)
 
             copyCommonResources.dependsOn(copy)
             copy.dependsOn(task)
@@ -51,12 +51,12 @@ class BundleArtifactsPlugin : Plugin<Project> {
 
     private fun getDevelopmentCompileExecutableKotlinTasks(
         target: Project,
-    ) = ChromeExtensionScripts.targets().mapNotNull { jsTarget ->
+    ) = ChromeExtensionScripts.values().mapNotNull { scripts ->
         val name = CompileTasks.compileExecutableKotlin(
-            jsTarget,
+            scripts.toString(),
             KotlinJsBinaryMode.DEVELOPMENT,
         )
 
-        target.tasks.findByName(name)?.let { jsTarget to it }
+        target.tasks.findByName(name)?.let { scripts to it }
     }
 }
