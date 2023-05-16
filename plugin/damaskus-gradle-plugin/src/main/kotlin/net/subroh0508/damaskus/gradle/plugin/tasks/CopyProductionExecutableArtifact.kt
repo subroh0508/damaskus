@@ -1,22 +1,21 @@
 package net.subroh0508.damaskus.gradle.plugin.tasks
 
 import net.subroh0508.damaskus.gradle.plugin.ChromeExtensionScripts
-import net.subroh0508.damaskus.gradle.plugin.internal.findOrRegister
 import net.subroh0508.damaskus.gradle.plugin.internal.getArtifactDir
 import org.gradle.api.Project
 import org.gradle.api.tasks.Copy
 import org.gradle.api.tasks.TaskProvider
-import java.io.File
 
-private const val TASK_COPY_DEVELOPMENT_EXECUTABLE_ARTIFACT = "copyDevelopmentExecutableArtifact"
+private const val TASK_COPY_PRODUCTION_EXECUTABLE_ARTIFACT = "copyProductionExecutableArtifact"
+private const val TASK_COPY_COMMON_RESOURCES = "copyCommonResources"
 
-fun Project.buildCopyDevelopmentExecutableArtifact(
+fun Project.buildCopyProductionExecutableArtifact(
     scripts: ChromeExtensionScripts,
 ): TaskProvider<Copy> = tasks.register(
-    scripts.toString() + TASK_COPY_DEVELOPMENT_EXECUTABLE_ARTIFACT.capitalize(),
+    scripts.toString() + TASK_COPY_PRODUCTION_EXECUTABLE_ARTIFACT.capitalize(),
     Copy::class.java,
 ) {
-    from("$buildDir/$ORIGINAL_FILE_DIR_PATH") {
+    from("$buildDir/${scripts.filename}") {
         include("*${scripts.filename}.js")
         include("*${scripts.filename}.js.map")
 
@@ -25,5 +24,3 @@ fun Project.buildCopyDevelopmentExecutableArtifact(
 
     into(getArtifactDir(scripts.path).absolutePath)
 }
-
-private const val ORIGINAL_FILE_DIR_PATH = "compileSync/js/main/developmentExecutable/kotlin"

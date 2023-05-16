@@ -11,10 +11,6 @@ enum class ChromeExtensionScripts(val path: String) {
     SERVICE_WORKER(""),
     OPTIONS("options");
 
-    companion object {
-        fun targets() = values().map(ChromeExtensionScripts::toString)
-    }
-
     val filename get() = name.toLowerCase().replace("_", "-")
 
     override fun toString() = name.toLowerCase().camelize()
