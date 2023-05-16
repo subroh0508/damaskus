@@ -3,7 +3,6 @@ package net.subroh0508.damaskus.gradle.plugin
 import net.subroh0508.damaskus.gradle.plugin.tasks.*
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.kotlin.dsl.getValue
 import org.gradle.kotlin.dsl.the
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
@@ -30,6 +29,6 @@ class BundleArtifactsPlugin : Plugin<Project> {
             }
         }
 
-        target.chromeExtensionExecutableArtifact()
+        target.chromeExtension()
     }
 }

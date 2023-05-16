@@ -8,9 +8,9 @@ import org.gradle.api.tasks.TaskProvider
 import org.gradle.kotlin.dsl.getValue
 import org.jetbrains.kotlin.gradle.targets.js.dsl.KotlinJsBinaryMode
 
-private const val TASK_CHROME_EXTENSION_PRODUCTION_EXECUTABLE_ARTIFACT = "chromeExtensionProductionExecutableArtifacts"
+private const val TASK_CHROME_EXTENSION_PRODUCTION = "chromeExtensionProduction"
 
-fun Project.chromeExtensionProductionExecutableArtifact(
+fun Project.chromeExtensionProduction(
     copyCommonResources: Copy,
 ) {
     val task by registerChromeExtensionProductionExecutableArtifact()
@@ -25,7 +25,7 @@ fun Project.chromeExtensionProductionExecutableArtifact(
 }
 
 private fun Project.registerChromeExtensionProductionExecutableArtifact(): TaskProvider<Task> = tasks.register(
-    TASK_CHROME_EXTENSION_PRODUCTION_EXECUTABLE_ARTIFACT,
+    TASK_CHROME_EXTENSION_PRODUCTION,
 ) {
     group = DEFAULT_TASK_GROUP
     description = "Build artifacts for Chrome Extension by production build"
