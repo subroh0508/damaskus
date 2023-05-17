@@ -1,5 +1,6 @@
 plugins {
     `kotlin-dsl`
+    alias(libs.plugins.kotlinx.serialization)
 }
 
 dependencies {
