@@ -3,6 +3,8 @@ plugins {
 }
 
 dependencies {
+    implementation(libs.kotlinx.serialization)
+
     compileOnly(kotlin("gradle-plugin"))
 }
 
