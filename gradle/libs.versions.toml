@@ -5,7 +5,7 @@ detekt = "1.22.0"
 
 kotlinx-serialization = "1.5.1"
 
-kotest = "5.6.1"
+kotest = "5.9.1"
 
 kotlin-poet = "1.13.2"
 
